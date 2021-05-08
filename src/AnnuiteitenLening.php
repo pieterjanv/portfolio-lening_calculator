@@ -96,6 +96,18 @@ class AnnuiteitenLening {
 	}
 
 	/**
+	 * Bepaal het periodiek bedrag (het vaste bedrag per periode)
+	 * @return float Het verschuldigde (vaste) periodieke bedrag
+	 */
+	public function getPeriodiekBedrag() {
+		return (new AnnuiteitenLeningCalculator(
+			$this->totaalSchuld,
+			$this->renteVoet,
+			$this->nPerioden
+		))->getPeriodiekBedrag();
+	}
+
+	/**
 	 * Voeg een aflossing toe
 	 * @param float $bedrag Totaal betaald bedrag (aflossing + rente)
 	 */
@@ -113,7 +125,7 @@ class AnnuiteitenLening {
 
 		$periodiekBedrag = $calculator->getPeriodiekBedrag();
 
-		if ($bedrag !== $periodiekBedrag) {
+		if ($bedrag !== round($periodiekBedrag, 2)) {
 			throw new AflossingsBedragException('Aflossingsbedrag niet gelijk aan periodiek bedrag.');
 		}
 

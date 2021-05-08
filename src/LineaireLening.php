@@ -135,6 +135,19 @@ class LineaireLening {
 	}
 
 	/**
+	 * Bepaal het periodiek bedrag
+	 * @param int $iPeriode Het periode nummer
+	 * @return float Het verschuldigde periodieke bedrag
+	 */
+	public function getPeriodiekBedrag($iPeriode) {
+		return (new LineaireLeningCalculator(
+			$this->totaalSchuld,
+			$this->renteVoet,
+			$this->nPerioden
+		))->getPeriodiekBedrag($iPeriode);
+	}
+
+	/**
 	 * Exporteer het aflossingsschema als csv
 	 * @param string|null $filename Het absolute bestandspad, bv. 'C:\Users\John\export.csv'
 	 */

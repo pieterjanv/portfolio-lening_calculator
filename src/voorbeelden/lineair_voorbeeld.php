@@ -9,7 +9,10 @@ $klant = new Klant('John');
 $totaleSchuld = 1e5;
 $renteVoet = .04;
 $nPerioden = 10;
-$beginPeriode = new Periode(2021, 05);
+$vandaag = new DateTime();
+$beginPeriode = new Periode(
+	(int) $vandaag->format('Y'), (int) $vandaag->format('n') + 1
+);
 
 
 // SCHEMA VANUIT CALCULATOR
@@ -19,7 +22,7 @@ $beginPeriode = new Periode(2021, 05);
 	$renteVoet,
 	$nPerioden
 ))
-	->getAflossingsSchema(new Periode(2021, 05))
+	->getAflossingsSchema($beginPeriode)
 	->toCSV('lineair-calculator.csv');
 
 

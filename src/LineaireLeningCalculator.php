@@ -77,6 +77,18 @@ class LineaireLeningCalculator {
 	}
 
 	/**
+	 * Bepaal het periodiek bedrag
+	 * @param int $iPeriode Het periode nummer
+	 * @return float Het verschuldigde periodieke bedrag
+	 */
+	public function getPeriodiekBedrag($iPeriode) {
+
+		$bedrag = $this->getAflossingsBedrag() + $this->getRenteBedrag($iPeriode);
+
+		return $bedrag;
+	}
+
+	/**
 	 * Bepaal het aflossingsbedrag
 	 * @return float Het verschuldigde (vaste) aflossingsbedrag
 	 */
